@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import numpy as np
+import pandas as pd
 import os, sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -36,25 +37,24 @@ with st.sidebar:
 
 # ------------------ Prepare Input for Pipeline ------------------
 def make_input():
-    return {
+    return pd.DataFrame({
         'pclass': [pclass],
-        'name': ["unknown"],  
+        'name': ["unknown"], 
         'sex': [gender],
         'sibsp': [sibsp],
         'parch': [parch],
         'ticket': ["unknown"],
         'fare': [fare],
         'age': [age],
-        'embarked': [np.nan]  
-    }
+        'embarked': [np.nan] 
+    })
 
 # ------------------ Main Layout ------------------
 st.header("🚢 Titanic Survival Predictor")
 
 if predict_button:
     X_input = make_input()
-    proba = model.predict_proba(pd.DataFrame(X_input))[:,1][0]
-    proba = float(proba) 
+    proba = float(model.predict_proba(X_input)[:,1][0])
 
     st.subheader("📈 Prediction Result")
     st.progress(proba)

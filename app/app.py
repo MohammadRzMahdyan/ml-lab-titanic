@@ -3,7 +3,6 @@ import joblib
 import numpy as np
 import pandas as pd
 import os, sys
-import imghdr
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 

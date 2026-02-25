@@ -5,3 +5,4 @@ seaborn
 xgboost
 matplotlib
 streamlit
+altair==4.2.2
